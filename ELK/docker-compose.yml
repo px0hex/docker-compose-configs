@@ -5,7 +5,7 @@ services:
     image: elasticsearch:9.5.5
     container_name: elasticsearch
     volumes:
-      - ./elasticsearch/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./Elasticsearch/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - es_data:/usr/share/elasticsearch/data  # Именованный volume защитит от ошибок прав доступа (AccessDenied)
     environment:
       ES_JAVA_OPTS: "-Xmx300m -Xms300m"
@@ -22,7 +22,7 @@ services:
     image: logstash:9.5.5
     container_name: logstash
     volumes:
-      - ./logstash/config.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./Logstash/config.yml:/usr/share/logstash/config/logstash.yml:ro
     environment:
       LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     ports:
@@ -40,7 +40,7 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - ./kibana/config.yml:/usr/share/kibana/config/kibana.yml:ro
+      - ./Kibana/config.yml:/usr/share/kibana/config/kibana.yml:ro
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200 # Явно указываем Kibana внутренний Docker-адрес Elasticsearch
     networks:
